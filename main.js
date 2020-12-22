@@ -1,5 +1,5 @@
-import {insertMainData, insertElement, insertImg, insertElementWithPlace, animationForSlider, insertCategoriesData, 
-insertOneCategoriesData, insertOneBookData, insertBasket, insertOrderData, insertActionOne, banerstep, onReady}
+import {insertMainData, insertElement, insertElementWithPlace, insertCategoriesData, 
+insertOneCategoriesData, insertOneBookData, insertBasket, insertOrderData, insertActionOne, onReady}
 from "./functions.js"
 
 import{fetchData, postOrder} from "./server.js"
@@ -7,7 +7,6 @@ import{fetchData, postOrder} from "./server.js"
 let tempDB;
 let order=[];
 
-const body = document.getElementById('body');
 const upMenu = document.getElementsByClassName('Header')[0];
 let localStr = window.localStorage;
 
@@ -91,44 +90,20 @@ window.onload = async function (){
     if (screan.length > 0){ 
         screan[0].remove();
     }
+
     let container = insertElementWithPlace('div', 'container', upMenu, 'afterend');
     document.getElementsByClassName('container')[0].style.display='none';
 
     scRender = new screen(container, tempDB, window.location.hash.split("/"));
 
     let categoriesContent = document.getElementsByClassName("categoriesContent")[0];
+
     for(let i = 0; i < scRender.db.Categories.length; i++){
         let textA = insertElement('a', 'oneCategory', categoriesContent);
         textA.innerHTML = scRender.db.Categories[i].name;
         textA.id = scRender.db.Categories[i].id;
     }
-   //reCount();
     scRender.renderScreen();
-};
-
-function reCount(){
-    let counter = 0, price = 0;
-    
-    let sum = document.getElementById("priceAll");
-    let prCounter = document.getElementById("PrCounter");
-    let BacketArea = document.getElementsByClassName("BacketArea");
-
-    console.log(BacketArea)
-    if (BacketArea.length > 1){
-        BacketArea = BacketArea[1].firstChild
-    }
-
-    if(order.length != 0){
-        for (let i=0; i < order.length; i += 2){
-            counter = counter + order[i+1];
-            price = price + countPrice(order[i]) * order[i+1];
-        }
-    }
-    sum.innerHTML = price.toFixed(2);
-    if (BacketArea.id == 'priceAll'){
-        BacketArea.innerHTML='Загальна вартість замовлення: ' + price.toFixed(2)+'грн.';
-        prCounter.innerHTML = counter;
-    }
 };
 
 function countPrice(id){
@@ -157,6 +132,12 @@ window.addEventListener('click', (event)=>{
             window.location.hash = '#catalog/'+event.target.id; 
             break;
         }
+        case 'priceAll':{
+            if (loc!='#backetPage' && event.target.id!=''){
+                window.location.hash = '#backetPage'; 
+                break;
+            }
+        }     
         case 'PrCounter':{ 
             if (loc != '#basketPage' && event.target.id!=''){
                     window.location.hash = '#backetPage';
@@ -168,13 +149,7 @@ window.addEventListener('click', (event)=>{
                 window.location.hash = '#backetPage';
                 break;
             }
-        }
-        case 'priceAll':{
-            if (loc!='#backetPage' && event.target.id!=''){
-                window.location.hash = '#backetPage'; 
-                break;
-            }
-        }        
+        }           
         case 'action':{ 
             window.location.hash ='#oneDiscount/'+ event.target.id; 
             break;
@@ -183,14 +158,6 @@ window.addEventListener('click', (event)=>{
             window.location.hash ='#oneBookPage/'+ event.target.id; 
             break;
         }
-       /* case 'order':{
-            addToOrder(event.target);
-            break;
-        }
-        case 'unorder':{
-            deleteFromOrder(event.target);
-            break;
-        }*/
         case 'orderBtn':{
             if(order.length > 0){
                 window.location.hash ='#createOrder';
