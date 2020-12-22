@@ -12,8 +12,7 @@ import {insertMainData, insertElement, insertElementWithPlace, insertCategoriesD
     
     onReady(function() {
         document.getElementById('load').style.display='none'
-        document.getElementsByClassName('container')[0].style.display='block' 
-    });
+   });
     
     class screen{
         constructor(container, db, webURL){
