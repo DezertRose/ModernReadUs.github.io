@@ -44,7 +44,6 @@ class screen{
             break;}
             case '#backetPage':{
                 insertBasket(this.container, this.db, order);
-                // reCount()
             break;}
             case '#oneDiscount':{
                 if (this.hashId >= 0 && this.hashId < this.db.Discounts.length){
@@ -61,7 +60,6 @@ class screen{
             default: {
                 window.location.hash = ''
                 insertMainData(this.container, this.db);
-                //reCount()
             break;}
         }
     }
