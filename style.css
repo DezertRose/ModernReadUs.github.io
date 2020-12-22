@@ -164,6 +164,7 @@ html{
 
 .container{
     z-index: 2;
+    display: block;
 }
 
 /* Поле акций */
