@@ -39,15 +39,6 @@ function insertMainData(container, db) {
         slideBtn.value = 'Узнать больше';
         slideBtn.id=db.Discounts[i].id;
     }
-    
-    /*нумерация слайдов
-    let numbers = insertElementWitoutPlace('div', 'numbers', slideDisc);
-    numbers.style.gridTemplateColumns=' 7fr repeat('+db.Discounts.length+',1fr) 7fr';
-    insertElement('div', '', numbers);
-    for (let j=0; j<db.Discounts.length; j++){
-        insertElement('div', 'number', numbers).value = db.Books[j].id;
-    }
-    insertElement('div', '', numbers);*/
 
     /*Заполнение главной области*/
     let top = insertElement('div', 'top', container);
@@ -65,49 +56,6 @@ function insertMainData(container, db) {
             acBtn.value = 'Добавить в корзину';
         }
     }
-
-   //setInterval(() => { animationForSlider(all);}, 5000);
-}
-
-function animationForSlider(parent) {
-    let startPoint = null;
-    let endPoint = null;
-    let begin = true;
-    
-    let startScroll=parent.scrollLeft;
-    function sliderUp(currentTime) {
-        if (!startPoint){ 
-            startPoint = currentTime;
-        }
-
-        let process=currentTime-startPoint;
-        let tmpscroll=parent.scrollLeft;
-
-        if(process > 1000){
-            process = 1000
-        }
-        parent.scrollLeft = startScroll+parent.offsetWidth*(process/1000);
-        if(parent.scrollLeft == tmpscroll && !begin) 
-        {
-            window.requestAnimationFrame(sliderDown);
-        }
-        else if (process < 1000) {
-            begin = false;
-            window.requestAnimationFrame(sliderUp);
-        }
-    }
-    function sliderDown(currentTime) {
-        if (!endPoint){ endPoint = currentTime;}
-        let process = currentTime-endPoint;
-        if(process > 1000){
-            process=1000
-        }
-        parent.scrollLeft = startScroll*(1-(process/1000));
-        if (process < 1000) {
-            window.requestAnimationFrame(sliderDown);
-        }
-    }
-    window.requestAnimationFrame(sliderUp);
 }
 
 function insertCategoriesData(container, db){
@@ -222,50 +170,37 @@ function insertBasket(container, db, order){
     let onCount = insertElement('div', 'onCount', toBuy);
     let priceAll=insertElement('p', '', onCount);
     priceAll.id='priceAll';
+    priceAll.style.color ='rgb(255, 255, 255)'
     priceAll.innerHTML='Всего: '+0+'UA';
+
     let productList = insertElement('div', 'productList', toBuy);
-    for (let i = 0; i < order.length; i += 2){
-        let myProd = db.Books[order[i]];
+
+    for (let i = 0; i < order.length; i = i+ 2){
+
+        let myBook = db.Books[order[i]];
         let oneBook = insertElement('div', 'oneBook', productList);
 
-        insertImg('img','', myProd.images[0],oneBook).id = myProd.id;
+        insertImg('img','', myBook.images[0], oneBook).id = myBook.id;
         insertElement('p', 'counterOrdered', oneBook).innerHTML = order[i+1];
         let textDiv = insertElement('div', '', oneBook);
-        let productName = insertElement('p', 'productName', textDiv)
-        productName.innerHTML = myProd.productName;
-        productName.id = myProd.id;
-        insertElement('p', 'productComponents', textDiv).innerHTML = myProd.productComponents;
-        insertElement('p', 'price', textDiv).innerHTML = myProd.price+' UA';
+        
+        let bookTitle = insertElement('p', 'bookTitle', textDiv)
+        bookTitle.innerHTML = myBook.bookTitle;
+        bookTitle.id = myBook.id;
+        insertElement('p', 'productComponents', textDiv).innerHTML = myBook.productComponents;
+        insertElement('p', 'price', textDiv).innerHTML = myBook.price+' UA';
+
         let acBtn = insertElementWithType('input', 'addOrder', 'button', oneBook)
-        acBtn.value = '+1'; 
-        let delBtn = insertElementWithType('input', 'unorder', 'button', oneBook)
-        delBtn.value = '-1'; 
+        acBtn.value = '+1';
     }
 }
 
-function insertActionOne(container, db, hashId){
+function insertDiscountOne(container, db, hashId){
     let aboutAct = insertElement('div', 'aboutAct', container);
     insertElement('p', 'oneActionName', aboutAct).innerHTML = db.Discounts[hashId].name;
     insertElement('p', 'actionTime', aboutAct).innerHTML = 'До: '+db.Discounts[hashId].actionTime;
     insertImg('img', 'oneACtionImg', db.Discounts[hashId].image,aboutAct);
     insertElement('p', 'oneActionDescription', aboutAct).innerHTML=db.Discounts[hashId].about;
-}
-
-let start = null;
-function banerstep(currentTime) {
-    if (!start) {start =currentTime};
-    var process = currentTime-start;
-    let element = document.getElementById('resultBaner');
-    if(process > 500){
-        element.style.opacity = (100 - (process-500)/5)+'%';
-    }
-    else{
-        element.style.opacity = ((process)/5)+'%';
-    }
-    if (process < 1000) {
-        window.requestAnimationFrame(banerstep);
-    }
-    else{start = null;}
 }
 
 function onReady(callback) {
@@ -281,4 +216,4 @@ function onReady(callback) {
 
 export{insertMainData, insertElement, insertImg, insertElementWithType, insertElementWithPlace,
 animationForSlider, insertCategoriesData, insertOneCategoriesData, insertOneBookData, insertBasket, insertOrderData, 
-insertActionOne, banerstep, onReady};
+insertDiscountOne, onReady};
