@@ -1,5 +1,5 @@
 import {insertMainData, insertElement, insertElementWithPlace, insertCategoriesData, 
-insertOneCategoriesData, insertOneBookData, insertBasket, insertOrderData, insertDiscountOne, Begin}
+insertOneCategoriesData, insertOneBookData, insertBasket, insertOrderData, insertDiscountOne, onLoad}
 from "./functions.js"
     
 import{fetchData, postOrder} from "./server.js"
@@ -11,12 +11,8 @@ let order=[];
 const upMenu = document.getElementsByClassName('Header')[0];
 let localStr = window.localStorage;
     
-    
-Begin(function() {
-    document.getElementById('load').style.display='none'
-    document.getElementsByClassName('container')[0].style.display='block'
-});
-    
+onLoad();
+
 class screen{
         constructor(container, db, webURL){
             this.db = db;

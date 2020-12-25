@@ -206,17 +206,19 @@ function insertDiscountOne(container, db, hashId){
     insertElement('p', 'oneActionDescription', aboutAct).innerHTML=db.Discounts[hashId].about;
 }
 
-function Begin(callback) {
-    var intervalId = window.setInterval(
-        function() {
-            if (document.getElementsByClassName('container')[0] !== undefined) {
-                window.clearInterval(intervalId);
-                callback.call(this);
-            }
-        },
-    800);
-}
+function onLoad() {
+   let temp =  window.setInterval(       
+    function name() {
+        if(document.getElementsByClassName('container')[0]!== undefined){
+            document.documentElementById('load').style = 'display: none;'
+            window.clearInterval(temp)
+        }
+
+    }, 600)    
+};
+
+
 
 export{insertMainData, insertElement, insertImg, insertElementWithType, insertElementWithPlace,
 insertCategoriesData, insertOneCategoriesData, insertOneBookData, insertBasket, insertOrderData, 
-insertDiscountOne, Begin};
+insertDiscountOne, Begin, onLoad};
