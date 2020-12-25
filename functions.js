@@ -210,7 +210,7 @@ function onLoad() {
    let temp =  window.setInterval(       
     function name() {
         if(document.getElementsByClassName('container')[0]!== undefined){
-            document.documentElementById('load').style = 'display: none;'
+            document.getElementById('load').style = 'display: none;'
             window.clearInterval(temp)
         }
 
@@ -221,4 +221,4 @@ function onLoad() {
 
 export{insertMainData, insertElement, insertImg, insertElementWithType, insertElementWithPlace,
 insertCategoriesData, insertOneCategoriesData, insertOneBookData, insertBasket, insertOrderData, 
-insertDiscountOne, Begin, onLoad};
+insertDiscountOne, onLoad};

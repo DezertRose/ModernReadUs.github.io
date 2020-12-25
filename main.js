@@ -11,7 +11,7 @@ let order=[];
 const upMenu = document.getElementsByClassName('Header')[0];
 let localStr = window.localStorage;
     
-onLoad();
+onLoad()
 
 class screen{
         constructor(container, db, webURL){
@@ -75,7 +75,7 @@ function changePage() {
         screan[0].remove();
     }
     let container = insertElementWithPlace('div', 'container', upMenu, 'afterend');
-    document.getElementsByClassName('container')[0].style.display='none';
+   // document.getElementsByClassName('container')[0].style.display='none';
 
     scRender = new screen(container, tempDB, window.location.hash.split("/"));
 
