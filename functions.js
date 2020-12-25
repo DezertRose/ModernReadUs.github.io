@@ -145,33 +145,33 @@ function insertOneBookData(container, db, hashId){
 }
 
 function insertOrderData(container){
-    let option = ["моб. телефон *", "Gmail", "ФИО*", "Адрес *", "Способ оплаты"];
+    let option = ["моб. телефон *", "Gmail", "ФИО*", "Адрес *", "Способ оплаты*"];
     let area = insertElement('div', 'area', container);
     for (let i = 0; i < option.length; i++){
-        let functionName = insertElement('p', 'functionName', area)
-        functionName.innerHTML = option[i];
-        functionName.id = i+'name';
-        insertElement('textarea', 'functionInput', area).id = i+'text';
+        let feelName = insertElement('p', 'feelName', area)
+        feelName.innerHTML = option[i];
+        feelName.id = i+'name';
+        insertElement('textarea', 'inputArea', area).id = i+'text';
     }
 
     let onCount = insertElement('div', 'onCount', container);
     let priceAll = insertElement('p', 'priceAll', onCount);
     let price = document.getElementById("priceAll").innerHTML;
-    priceAll.innerHTML='Всего: '+price+'UA';
-    let PutOrder = insertElementDetails('input', 'PutOrder', 'button', container)
-    PutOrder.value = "Заказать";
+    priceAll.innerHTML='Всего: '+ price +'UA';
+
+    let PutOrder = insertElementWithType('input', 'MakeOrder', 'button', container)
+    PutOrder.value = "Оформить";
 }
 
 function insertBasket(container, db, order){
     insertElement('div', 'orderBtn', container).innerHTML = 'Заказать';
     let toBuy = insertElement('div', 'toBuy', container);
-    insertElement('h3', 'conected', toBuy).innerHTML='Выбраные';
+    insertElement('h3', 'chosen', toBuy).innerHTML='Выбраные';
 
     let onCount = insertElement('div', 'onCount', toBuy);
     let priceAll=insertElement('p', '', onCount);
     priceAll.id='priceAll';
-    priceAll.style.color ='rgb(255, 255, 255)'
-    priceAll.innerHTML='Всего: '+0+'UA';
+    priceAll.innerHTML='Всего: '+ 0 +' UA';
 
     let productList = insertElement('div', 'productList', toBuy);
 
@@ -187,11 +187,14 @@ function insertBasket(container, db, order){
         let bookTitle = insertElement('p', 'bookTitle', textDiv)
         bookTitle.innerHTML = myBook.bookTitle;
         bookTitle.id = myBook.id;
+
         insertElement('p', 'productComponents', textDiv).innerHTML = myBook.productComponents;
         insertElement('p', 'price', textDiv).innerHTML = myBook.price+' UA';
 
         let acBtn = insertElementWithType('input', 'addOrder', 'button', oneBook)
-        acBtn.value = '+1';
+        acBtn.value = '+1'; 
+        let delBtn = insertElementWithType('input', 'delOrder', 'button', oneBook)
+        delBtn.value = '-1'; 
     }
 }
 
@@ -203,7 +206,7 @@ function insertDiscountOne(container, db, hashId){
     insertElement('p', 'oneActionDescription', aboutAct).innerHTML=db.Discounts[hashId].about;
 }
 
-function onReady(callback) {
+function Begin(callback) {
     var intervalId = window.setInterval(
         function() {
             if (document.getElementsByClassName('container')[0] !== undefined) {
@@ -215,5 +218,5 @@ function onReady(callback) {
 }
 
 export{insertMainData, insertElement, insertImg, insertElementWithType, insertElementWithPlace,
-animationForSlider, insertCategoriesData, insertOneCategoriesData, insertOneBookData, insertBasket, insertOrderData, 
-insertDiscountOne, onReady};
+insertCategoriesData, insertOneCategoriesData, insertOneBookData, insertBasket, insertOrderData, 
+insertDiscountOne, Begin};

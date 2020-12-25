@@ -297,10 +297,17 @@ html{
     font-family: Brush Script MT, Brush Script Std, cursivey;
 }
 
+.delOrder{
+    right: 10vw;
+}
+
 .addOrder{
+    left: 5px;
+}
+
+.addOrder, .delOrder{
     position:absolute;
     top: calc(100% - 3vmax);
-    left: 5px;
     background-color:rgba(60, 26, 87, 0.89);
     outline: none;
     border: none;
@@ -310,7 +317,7 @@ html{
     cursor: pointer;
     box-shadow: 4px 4px 10px #081e24;
 }
-.addOrder:hover{
+.addOrder:hover, .delOrder:hover{
     background-color:rgb(3, 25, 150);
 }
 
@@ -334,8 +341,98 @@ html{
     padding: 10px;
 }
 
+.orderBtn{
+    background-color: rgb(127, 136, 255);
+   height: 4vh;
+   width: 5vw;
+   position: fixed;
+   right: 2%;
+   float:right;
+   bottom: 3%;
+   cursor: pointer;
+   border-radius: 100%;
+   -webkit-animation: pulsing 2s infinite;
+   animation: pulsing 4s infinite;
+   border-color: rgb(0, 162, 255);
+   transition: background-color 1s linear;
+   text-align: center;
+   padding: 1%;
+}
 
+.orderBtn:hover{
+    background-color: blue;
+}
 
+@-webkit-keyframes pulsing {
+    0% {
+      -webkit-transform: scale(0.5, 0.5);
+      transform: scale(0.5, 0.5)
+    }
+    50% {
+      -webkit-transform: scale(1.0, 1.0);
+      transform: scale(1.0, 1.0);
+    }
+    100% {
+      -webkit-transform: scale(0.5, 0.5);
+      transform: scale(0.5, 0.5);
+    }
+  }
+  
+  @keyframes pulsing {
+    0% {
+      -webkit-transform: scale(0.5, 0.5);
+      transform: scale(0.5, 0.5)
+    }
+    50% {
+      -webkit-transform: scale(1.0, 1.0);
+      transform: scale(1.0, 1.0);
+    }
+    100% {
+      -webkit-transform: scale(0.5, 0.5);
+      transform: scale(0.5, 0.5);
+    }
+}
 
+.chosen{
+    text-align: center;
+    color: white;
+    font-family: URW Chancery L, cursive;
+    font-size: 2em;
+}
+
+.onCount{
+    text-align: center;
+    color: white;
+    font-family: URW Chancery L, cursive;
+}
+
+.area{
+    text-align: center;
+    color: white;
+}
+
+.area textarea{
+    resize: none;
+    width: 40vw;
+    height: 5vh;
+    overflow: hidden;
+    text-align: center;
+    font-size: large;
+}
+
+.MakeOrder{
+   background-color: rgb(127, 136, 255);
+   height: 3vh;
+   width: 10vw;
+   cursor: pointer;
+   border-radius: 100%;
+   border-color: rgba(111, 0, 255, 0.719);
+   transition: background-color 1s linear;
+   text-align: center;
+   padding: 2%;
+   text-align: center;
+   margin-left:45%;
+   color: white;
+}
 
 

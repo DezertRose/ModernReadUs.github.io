@@ -16,7 +16,7 @@ async function postOrder(Order) {
     .then(data => {return data;})
     .catch(
         function (error) {
-	        alert('Ошибка Сервера! '+ error);
+	        alert(error);
         }
     );
 }
